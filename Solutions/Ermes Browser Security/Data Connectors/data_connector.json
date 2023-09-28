@@ -1,0 +1,57 @@
+{
+	"type": "Microsoft.OperationalInsights/workspaces/providers/dataConnectors",
+	"apiVersion": "2021-10-01-preview",
+	"name": "[[concat(parameters('workspace'),'/Microsoft.SecurityInsights/',variables('connectorName'))]",
+	"location": "West Europe",
+	"kind": "RestApiPoller",
+	"properties": {
+		"connectorDefinitionName": "[[parameters('connectorDefinitionName')]",
+		"dataType": "[variables('logAnalyticsTableId1')]",
+		"dcrConfig": {
+			"streamName": "[concat('Custom-',variables('streamName1'))]",
+			"dataCollectionEndpoint": "[[parameters('dcrConfig').dataCollectionEndpoint]",
+			"dataCollectionRuleImmutableId": "[[parameters('dcrConfig').dataCollectionRuleImmutableId]"
+		},
+		"auth": {
+			"type": "OAuth2",
+			"ClientSecret": "[[parameters('clientSecret')]",
+			"ClientId": "[[parameters('clientId')]",
+			"GrantType": "client_credentials",
+			"TokenEndpoint": "https://api.shield.ermessecurity.com/oauth/token",
+			"TokenEndpointHeaders": {
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			"TokenEndpointQueryParameters": {
+				"grant_type": "client_credentials"
+			}
+		},
+		"request": {
+			"apiEndpoint": "https://api.shield.ermessecurity.com/public/v1/events",
+			"httpMethod": "GET",
+			"queryParameters": {
+				"max_results": 100,
+				"sort": "-_created",
+				"is_azure": "v3_0"
+			},
+			"queryWindowInMin": 5,
+			"queryTimeFormat": "yyyy-MM-ddTHH:mm:ss.000000+00:00",
+			"startTimeAttributeName": "gte__created",
+			"endTimeAttributeName": "lte__created",
+			"rateLimitQps": 1,
+			"retryCount": 3,
+			"timeoutInSeconds": 30,
+			"headers": {
+				"Accept": "application/json",
+				"User-Agent": "Scuba"
+			}
+		},
+		"response": {
+			"eventsJsonPaths": [
+				"$._items[*]"
+			]
+		},
+		"paging": {
+			"type": "LinkHeader"
+		}
+	}
+}
