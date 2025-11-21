@@ -16,14 +16,14 @@
 			"ClientSecret": "{{clientSecret}}",
 			"ClientId": "{{clientId}}",
 			"GrantType": "client_credentials",
-			"TokenEndpoint": "https://api.shield.ermessecurity.com/oauth/token",
+			"TokenEndpoint": "{{apiUrl}}/oauth/token",
 			"TokenEndpointHeaders": {
 				"Content-Type": "application/x-www-form-urlencoded"
 			},
 			"TokenEndpointQueryParameters": {}
 		},
 		"request": {
-			"apiEndpoint": "https://api.shield.ermessecurity.com/public/v1/events",
+			"apiEndpoint": "{{apiUrl}}/public/v1/events",
 			"httpMethod": "GET",
 			"queryParameters": {
 				"max_results": 100,
