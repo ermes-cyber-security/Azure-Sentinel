@@ -27,13 +27,13 @@
 			"httpMethod": "GET",
 			"queryParameters": {
 				"max_results": 100,
-				"sort": "-_created",
+				"sort": "_created",
 				"is_azure": "[variables('_solutionVersion')]"
 			},
 			"queryWindowInMin": 5,
 			"queryTimeFormat": "yyyy-MM-ddTHH:mm:ss.000000+00:00",
-			"startTimeAttributeName": "gte__created",
-			"endTimeAttributeName": "lt__created",
+			"startTimeAttributeName": "gt__created",
+			"endTimeAttributeName": "lte__created",
 			"rateLimitQps": 1,
 			"retryCount": 3,
 			"timeoutInSeconds": 30,
